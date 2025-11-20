@@ -8,5 +8,10 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
+    <div id="main">
+		<p></p>
+    </div>
+    <script> window.text = {{ text | safe }};</script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
