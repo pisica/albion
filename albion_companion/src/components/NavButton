@@ -1,0 +1,14 @@
+import React from 'react';
+
+export default function NavButton({ viewName, currentView, setCurrentView }) {
+    // ... all the NavButton logic ...
+    return (
+        <button
+            onClick={() => setCurrentView(viewName)}
+            // ... classes ...
+        >
+            {viewName}
+        </button>
+    );
+}
+
