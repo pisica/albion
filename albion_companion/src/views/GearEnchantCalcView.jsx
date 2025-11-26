@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function HomeView() {
+export default function GearEnchantCalcView() {
     return (
         <div className="p-8">
-            {Home View}
+            Gear Enchant Calculator View
         </div>
     );
 }
