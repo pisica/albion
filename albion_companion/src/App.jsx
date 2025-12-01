@@ -15,19 +15,21 @@ export default function App() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100">
+        <div className="flex flex-col min-h-screen">
             {/* Application Header - Top of the Page */}
-            <div className="w-full bg-orange-900 text-gray-100 p-4 shadow-xl flex justify-between items-center">
-                <h1 className="text-2xl font-extrabold tracking-wide text-white shadow-xl">
-                    Albion Companion App
+            <div className="w-full bg-orange-900 text-gray-100 p-4 flex justify-between items-center shadow-md relative">
+                <h1 className="text-2xl font-extrabold tracking-wide text-white">
+                  Albion Companion App
                 </h1>
             </div>
 
-            <div className="flex flex-grow w-full h-full overflow-hidden">
+            <div className="flex flex-grow w-full h-full">
                 {/* Left Sidebar Menu */}
                 <div className="w-1/6 bg-gray-500 py-6 border-r border-black flex flex-col">
                     {/* NavButton would be used here, passing down state handlers */}
-                    <h2 className="text-xl px-4 font-bold text-white mb-2 border-b pb-5 border-black">Navigation</h2>
+                    <h2 className="text-xl px-4 font-bold text-white mb-2 border-b pb-5 border-black">
+                      Navigation
+                    </h2>
                     <NavButton viewName="Crafting Calculator" currentView={currentView} setCurrentView={setCurrentView} />
                     <NavButton viewName="Gear Enchanting Calculator" currentView={currentView} setCurrentView={setCurrentView} />
                 </div>
