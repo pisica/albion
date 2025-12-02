@@ -4,7 +4,7 @@ import GearEnchantCalcView from './views/GearEnchantCalcView';
 import NavButton from './components/NavButton';
 
 export default function App() {
-    const [currentView, setCurrentView] = React.useState('Crafting Calculator');
+    const [currentView, setCurrentView] = React.useState('Gear Enchanting Calculator');
 
     // Function to render the correct component based on state
     const renderContent = () => {
