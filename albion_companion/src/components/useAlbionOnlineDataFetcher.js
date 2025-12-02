@@ -10,15 +10,12 @@ const useAlbionOnlineDataFetcher = (inputValue) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const nameToAPI={
-    "Holy Staff": "MAIN_HOLYSTAFF",
-    "Great Holy Staff": "2H_HOLYSTAFF",
-  }
+
   {/*console.info(inputValue)*/}
-  const API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T${inputValue[1]}_${nameToAPI[inputValue[0]]}?locations=Lymhurst`;
+  const API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T${inputValue[1]}_${inputValue[0]}?locations=Lymhurst`;
 
   useEffect(() => {
-    if (!inputValue) {
+    if (!inputValue[0]) {
       setLoading(false);
       return
     }
