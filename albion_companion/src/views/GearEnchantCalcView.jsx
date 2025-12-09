@@ -33,9 +33,11 @@ export default function GearEnchantCalcView() {
     }
 
     const fetchData = () => {
+      setFetchItem(['runes', ''])
       setFetchItem([selectedItem, selectedTierValue])
     }
 
+    {/*
     const loadingDiv = (
       <div className="text-white p-4">Loading data...</div>
     );
@@ -43,6 +45,7 @@ export default function GearEnchantCalcView() {
     const errorDiv = (
       <div className="text-white p-4">Error fetching data: {error}</div>
     );
+    */}
 
     const resultDiv = !data ? null : (
       <div className="p-6 bg-gray-700 rounded-lg shadow-lg">
@@ -134,7 +137,7 @@ export default function GearEnchantCalcView() {
           </button>
         </div>
         <div className="py-5">
-          {resultDiv || errorDiv}
+          {resultDiv}
         </div>
       </div>
     );

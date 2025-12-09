@@ -2,6 +2,7 @@ import React from 'react';
 import CraftingCalcView from './views/CraftingCalcView';
 import GearEnchantCalcView from './views/GearEnchantCalcView';
 import NavButton from './components/NavButton';
+import { CacheProvider } from './context/CacheContext.jsx';
 
 export default function App() {
     const [currentView, setCurrentView] = React.useState('Gear Enchanting Calculator');
@@ -15,6 +16,7 @@ export default function App() {
     };
 
     return (
+      <CacheProvider>
         <div className="flex flex-col min-h-screen">
             {/* Application Header - Top of the Page */}
             <div className="w-full bg-orange-900 text-gray-100 p-4 flex justify-between items-center shadow-md relative">
@@ -35,11 +37,12 @@ export default function App() {
                 </div>
 
                 {/* Main Content Area */}
-                <div className="w-full text-white bg-gray-600 overflow-y-auto">
-                    {renderContent()}
-                </div>
+                  <div className="w-full text-white bg-gray-600 overflow-y-auto">
+                      {renderContent()}
+                  </div>
             </div>
         </div>
+      </CacheProvider>
     );
 }
 
