@@ -14,17 +14,18 @@ const useAlbionOnlineDataFetcher = (inputValue) => {
   const { getCacheData, setCacheData } = useCache();
 
   {/*console.info(inputValue)*/}
-  const ITEM_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T${inputValue[1]}_${inputValue[0]}?locations=Lymhurst`;
-  const RUNE_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T4_Rune,T5_Rune,T6_Rune,T7_Rune,T8_Rune?locations=Lymhurst`;
-  const API_URL = inputValue[0] === 'runes' ? RUNE_API_URL : ITEM_API_URL
+{/*const ITEM_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T${inputValue[1]}_${inputValue[0]}?locations=Lymhurst`;*/}
+  const ITEM_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/${inputValue}?locations=Lymhurst`;
+  const RUNE_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/T4_Rune,T5_Rune,T6_Rune,T7_Rune,T8_Rune?locations=Lymhurst&qualities=1`;
+  const API_URL = inputValue === 'runes_T' ? RUNE_API_URL : ITEM_API_URL
 
   useEffect(() => {
-    if (!inputValue[0]) {
+    if (!inputValue) {
       setLoading(false);
       return
     }
 
-    const queryKey = inputValue ? `${inputValue[0]}_T${inputValue[1]}` : null;
+    const queryKey = inputValue;
     console.log(queryKey)
 
     const cachedData = getCacheData(queryKey);
@@ -55,6 +56,14 @@ const useAlbionOnlineDataFetcher = (inputValue) => {
 
       } finally {
         setLoading(false);
+      }
+      if (data) {
+        data.map((item, index) => (
+          console.log(`item: ${item.item_id}`)
+        ))
+      }
+      else {
+        console.log(`item: null`)
       }
     }
 

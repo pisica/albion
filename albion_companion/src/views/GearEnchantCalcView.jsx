@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
 import useAlbionOnlineDataFetcher from '../components/useAlbionOnlineDataFetcher';
+import useItemDataFetcher from '../components/useItemDataFetcher';
 import treeData from '../components/ItemTreeData.js';
+import { useCache } from '../context/CacheContext';
 
 export default function GearEnchantCalcView() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedItemString, setSelectedItemString] = useState(null);
     const [selectedEnchantValue, setEnchantValue] = useState('0');
     const [selectedTierValue, setTierValue] = useState('4');
-    const [fetchItem, setFetchItem] = useState([null, null]);
-    const {data, loading, error} = useAlbionOnlineDataFetcher(fetchItem);
+    const [fetchItem, setFetchItem] = useState(null);
+    {/*const {data, loading, error} = useAlbionOnlineDataFetcher(fetchItem);*/}
+    const {data, loading, error} = useItemDataFetcher(fetchItem);
+    useAlbionOnlineDataFetcher('runes_T');
+    const { getCacheData, setCacheData } = useCache();
+    const {runes, setRunes} = useState(null);
+
+    const rune = getCacheData('runes_T')
+    const runeSums = [];
+    for (let i = 0; i < 5; ++i) {
+      runeSums.push(i*288)
+    }
+
+    const cachedItem = getCacheData(fetchItem)
 
     const handleTierChange = (event) => {
       setTierValue(event.target.value);
@@ -33,9 +47,21 @@ export default function GearEnchantCalcView() {
     }
 
     const fetchData = () => {
-      setFetchItem(['runes', ''])
-      setFetchItem([selectedItem, selectedTierValue])
+      setFetchItem(`T${selectedTierValue}_${selectedItem}`)
     }
+
+    {/*
+    if (!getCacheData('runes_T')) {
+      useAlbionOnlineDataFetcher(['runes', ''])
+    }
+    setRunes(getCacheData)
+    */}
+
+    {/*
+    const fetchRunes = () => {
+      setFetchItem(['runes', ''])
+    }
+    */}
 
     {/*
     const loadingDiv = (
@@ -47,30 +73,35 @@ export default function GearEnchantCalcView() {
     );
     */}
 
-    const resultDiv = !data ? null : (
+    const resultDiv = data ? (
       <div className="p-6 bg-gray-700 rounded-lg shadow-lg">
       {/*<h2 className="text-2xl font-bold mb-4 text-orange-300">
           Master's Hollowfall
         </h2>*/}
 
         <div className="space-y-3">
-          <div className="grid grid-cols-3 border-b border-black pb-4">
+          <div className="grid grid-cols-5 border-b border-black pb-4">
             <span></span> {/*Place holder*/}
             <span>Min Sell Order</span>
+            <span>Rune Min Sell Order</span>
             <span>Max Buy Order</span>
+            <span>Rune Max Buy Order</span>
           </div>
-          {data.map((item, index) => (
+          {cachedItem[1].map((item, index) => (
             <div key={index} className="border-b border-black pb-3">
-              <div className="grid grid-cols-3 gap-4 mt-2 text-gray-200">
-                <p>{selectedItemString} [{fetchItem[1]}.{item.quality-1}]</p>
-                <p>{item.sell_price_min > 0 ? item.sell_price_min.toLocaleString() : "N/A"}</p>
-                <p>{item.buy_price_max > 0 ? item.buy_price_max.toLocaleString() : "N/A"}</p>
+              <div className="grid grid-cols-5 gap-4 mt-2 text-gray-200">
+              {/*}<p>{selectedItemString} [{fetchItem[1]}.{item.quality-1}]</p>*/}
+              <p>{cachedItem[0]['localizedNames']['EN-US']} [{selectedTierValue}.{item.quality-1}]</p>
+              <p>{item.sell_price_min > 0 ? item.sell_price_min.toLocaleString() : "N/A"}</p>
+              <p>{rune[selectedTierValue-4].sell_price_min*runeSums[index]}</p>
+              <p>{item.buy_price_max > 0 ? item.buy_price_max.toLocaleString() : "N/A"}</p>
+              <p>{rune[selectedTierValue-4].buy_price_max*runeSums[index]}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-    )
+    ) : null
 
     {/*if (!data || data.length === 0) {
       return <div className="text-white p-4">No price data available.</div>
