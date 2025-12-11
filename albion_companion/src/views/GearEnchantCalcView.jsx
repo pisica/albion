@@ -16,6 +16,7 @@ export default function GearEnchantCalcView() {
     const {fragData, fragLoading, fragError} = useFragmentPriceFetcher(fetchFragment);
     const { getCacheData, setCacheData } = useCache();
     const [ fragmentCost, setFragmentCost ] = useState([0]);
+    const [ fragmentsNeeded, setFragmentsNeeded ] = useState(0);
 
     console.info(fragData);
 
@@ -60,7 +61,7 @@ export default function GearEnchantCalcView() {
         'armor': 192,
         'bag': 192,
         'helmet': 96,
-        'boots': 96,
+        'shoes': 96,
         'cape': 96,
         'offhand': 96,
       };
@@ -75,6 +76,7 @@ export default function GearEnchantCalcView() {
       } else {
         fragmentCount = itemTypeFragCount[data[0]['slotType']];
       }
+      setFragmentsNeeded(fragmentCount)
 
       const cost = [0];
       cost.push(data[1][0].sell_price_min+fragmentCount*fragData['runes'][selectedTierValue-4].sell_price_min)
@@ -100,7 +102,6 @@ export default function GearEnchantCalcView() {
        return loadingDiv;
       }
       if (data && fragData) {
-        console.info('data && fragData')
         return (
           <div className="p-6 bg-gray-700 rounded-lg shadow-lg">
           {/*<h2 className="text-2xl font-bold mb-4 text-orange-300">
@@ -197,6 +198,9 @@ export default function GearEnchantCalcView() {
           >
           Get Data
           </button>
+          <div>
+            Fragments needed: {fragmentsNeeded}
+          </div>
         </div>
         <div className="py-5">
           {resultDiv()}

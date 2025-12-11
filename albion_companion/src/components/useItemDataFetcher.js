@@ -37,6 +37,7 @@ const useAlbionOnlineDataFetcher = (inputValue) => {
 
       try {
         console.info(PRICE_API_URL);
+        console.info(ITEM_DATA_API_URL);
         const [priceResponse, itemResponse] = await Promise.all([
           fetch(PRICE_API_URL),
           fetch(ITEM_DATA_API_URL)
