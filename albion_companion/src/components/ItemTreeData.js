@@ -9,6 +9,12 @@ const weapons = [
     value: 'Nature Staff', label: 'Nature Staff', selectable: false, children: [
       {value: 'MAIN_NATURESTAFF', label: 'Nature Staff'},
       {value: '2H_NATURESTAFF', label: 'Great Nature Staff'},
+      {value: 'MAIN_FIRESTAFF_KEEPER', label: 'Wild Staff'},
+      {value: 'MAIN_NATURESTAFF_KEEPER', label: 'Druidic Staff'},
+      {value: '2H_NATURESTAFF_HELL', label: 'Blight Staff'},
+      {value: '2H_NATURESTAFF_KEEPER', label: 'Rampant Staff'},
+      {value: 'MAIN_NATURESTAFF_AVALON', label: 'Ironroot Staff'},
+      {value: 'MAIN_NATURESTAFF_CRYSTAL', label: 'Forgebark Staff'},
     ]
   }
 ]

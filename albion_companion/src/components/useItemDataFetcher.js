@@ -11,8 +11,8 @@ const useAlbionOnlineDataFetcher = (inputValue) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const PRICE_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/${inputValue}?locations=Lymhurst`;
-  const ITEM_DATA_API_URL = `https://cors-anywhere.herokuapp.com/https://gameinfo.albiononline.com/api/gameinfo/items/${inputValue}/data`;
+  const PRICE_API_URL = `https://west.albion-online-data.com/api/v2/stats/prices/${inputValue},${inputValue}@1,${inputValue}@2,${inputValue}@3,${inputValue}@4?locations=Lymhurst&qualities=1`;
+  const ITEM_DATA_API_URL = `https://corsproxy.io/https://gameinfo.albiononline.com/api/gameinfo/items/${inputValue}/data`;
 
   useEffect(() => {
     if (!inputValue) {
