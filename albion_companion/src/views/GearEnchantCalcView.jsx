@@ -47,16 +47,12 @@ export default function GearEnchantCalcView() {
 
     useEffect(() =>{
       if (!data) {
-        console.info(`frag cost calc !data`)
         return;
       }
       if (!fragData['runes']) {
-        console.info(fragData)
-        console.info(`frag cost calc !fragData`)
         return;
       }
       console.info('GOT BOTH DATA AND FRAGDATA!')
-      console.info(fragData)
       var fragmentCount = 0;
       const itemTypeFragCount = {
         'oneHanded': 288,
@@ -71,20 +67,16 @@ export default function GearEnchantCalcView() {
 
       const weaponType = data[0]['twoHanded'];
       if (weaponType != null) {
-        console.log(weaponType)
         if (weaponType) {
           fragmentCount = itemTypeFragCount['twoHanded'];
         } else {
           fragmentCount = itemTypeFragCount['oneHanded'];
         }
       } else {
-        console.info(data[0]['slotType']);
         fragmentCount = itemTypeFragCount[data[0]['slotType']];
       }
-      console.log(fragmentCount);
 
       const cost = [0];
-      console.info(fragData)
       cost.push(data[1][0].sell_price_min+fragmentCount*fragData['runes'][selectedTierValue-4].sell_price_min)
       cost.push(cost[cost.length-1]+fragmentCount*fragData['souls'][selectedTierValue-4].sell_price_min)
       cost.push(cost[cost.length-1]+fragmentCount*fragData['relics'][selectedTierValue-4].sell_price_min)
@@ -92,20 +84,6 @@ export default function GearEnchantCalcView() {
       setFragmentCost(cost);
     }, [fragData, data]);
 
-    {/*
-    if (!getCacheData('runes_T')) {
-      useAlbionOnlineDataFetcher(['runes', ''])
-    }
-    setRunes(getCacheData)
-    */}
-
-    {/*
-    const fetchRunes = () => {
-      setFetchItem(['runes', ''])
-    }
-    */}
-
-    
     const loadingDiv = (
       <div className="text-white p-4">Loading data...</div>
     );
@@ -113,7 +91,6 @@ export default function GearEnchantCalcView() {
     const errorDiv = (
       <div className="text-white p-4">Error fetching data: {error}</div>
     );
-    
 
     const resultDiv = () => {
       if (error || fragError) {
@@ -144,7 +121,7 @@ export default function GearEnchantCalcView() {
                   {/*}<p>{selectedItemString} [{fetchItem[1]}.{item.quality-1}]</p>*/}
                   <p>{data[0]['localizedNames']['EN-US']} [{selectedTierValue}.{index}]</p>
                   <p>{item.sell_price_min > 0 ? item.sell_price_min.toLocaleString() : "N/A"}</p>
-                  <p>{fragmentCost[index]}</p>
+                  <p>{fragmentCost[index] ? fragmentCost[index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}</p>
                   <p>{item.buy_price_max > 0 ? item.buy_price_max.toLocaleString() : "N/A"}</p>
                   <p>{}</p>
                   </div>
