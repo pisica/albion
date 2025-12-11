@@ -18,8 +18,6 @@ export default function GearEnchantCalcView() {
     const [ fragmentCost, setFragmentCost ] = useState([0]);
     const [ fragmentsNeeded, setFragmentsNeeded ] = useState(0);
 
-    console.info(fragData);
-
     const handleTierChange = (event) => {
       setTierValue(event.target.value);
     }
@@ -60,7 +58,7 @@ export default function GearEnchantCalcView() {
         'twoHanded': 384,
         'armor': 192,
         'bag': 192,
-        'helmet': 96,
+        'head': 96,
         'shoes': 96,
         'cape': 96,
         'offhand': 96,
@@ -85,6 +83,28 @@ export default function GearEnchantCalcView() {
       console.info(`cost: ${cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
       setFragmentCost(cost);
     }, [fragData, data]);
+
+    const convertTimestamp = (timestamp) => {
+      const utcTimestamp = new Date(timestamp + 'Z');
+      if (utcTimestamp.getFullYear() == 0) {
+        return 'N/A';
+      }
+      const localTimestamp = utcTimestamp.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      const currentTimestamp = new Date();
+      const utcTimestampMs = utcTimestamp.getTime();
+      const currentTimestampMs = currentTimestamp.getTime();
+      const difference = utcTimestampMs - currentTimestampMs;
+      const diffHours = Math.round(difference / 3600000);
+      const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+      return rtf.format(diffHours, 'hours');
+    }
 
     const loadingDiv = (
       <div className="text-white p-4">Loading data...</div>
@@ -112,9 +132,9 @@ export default function GearEnchantCalcView() {
               <div className="grid grid-cols-5 border-b border-black pb-4">
                 <span></span> {/*Place holder*/}
                 <span>Min Sell Order</span>
-                <span>Item Cost (Fragments)</span>
+                <span>T0 Cost + Fragments</span>
                 <span>Max Buy Order</span>
-                <span>Item Cost (Fragments)</span>
+                <span>Date</span>
               </div>
               {data[1].map((item, index) => (
                 <div key={index} className="border-b border-black pb-3">
@@ -124,7 +144,7 @@ export default function GearEnchantCalcView() {
                   <p>{item.sell_price_min > 0 ? item.sell_price_min.toLocaleString() : "N/A"}</p>
                   <p>{fragmentCost[index] ? fragmentCost[index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}</p>
                   <p>{item.buy_price_max > 0 ? item.buy_price_max.toLocaleString() : "N/A"}</p>
-                  <p>{}</p>
+                  <p>{convertTimestamp(item.sell_price_min_date)}</p>
                   </div>
                 </div>
               ))}
