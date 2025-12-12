@@ -22,6 +22,7 @@ const weapons = [
     ]
   }
 ]
+
 const chestArmor = [
   {
     value: 'Chest Armor', label: 'Chest Armor', selectable: false, children: [
@@ -67,6 +68,7 @@ const chestArmor = [
     ]
   }
 ]
+
 const headArmor = [
   {
     value: 'Head Armor', label: 'Head Armor', selectable: false, children: [
@@ -112,6 +114,7 @@ const headArmor = [
     ]
   }
 ]
+
 const footArmor = [
   {
     value: 'Foot Armor', label: 'Foot Armor', selectable: false, children: [
@@ -157,12 +160,74 @@ const footArmor = [
     ]
   }
 ]
+
+const offhands = [
+  {
+    value: 'Offhands', label: 'Offhands', selectable: false, children: [
+      {
+        value: 'mage', label: 'Mage', selectable: false, children: [
+          { value: 'OFF_BOOK', label: 'Tome of Spells' },
+          { value: 'OFF_ORB_MORGANA', label: 'Eye of Secrets' },
+          { value: 'OFF_DEMONSKULL_HELL', label: 'Muisak' },
+          { value: 'OFF_TOTEM_KEEPER', label: 'Taproot' },
+          { value: 'OFF_CENSER_AVALON', label: 'Celestial Censer' },
+          { value: 'OFF_TOME_CRYSTAL', label: 'Timelocked Grimoire' },
+        ]
+      },
+      {
+        value: 'Hunter', label: 'Hunter', selectable: false, children: [
+          { value: 'OFF_TORCH', label: 'Torch' },
+          { value: 'OFF_HORN_KEEPER', label: 'Mistcaller' },
+          { value: 'OFF_JESTERCANE_HELL', label: 'Leering Cane' },
+          { value: 'OFF_LAMP_UNDEAD', label: 'Cryptcangle' },
+          { value: 'OFF_TALISMAN_AVALON', label: 'Sacred Scepter' },
+          { value: 'OFF_TORCH_CRYSTAL', label: 'Blueflame Troch' },
+        ]
+      },
+      {
+        value: 'Warrior', label: 'Warrior', selectable: false, children: [
+          { value: 'OFF_SHIELD', label: 'Shield' },
+          { value: 'OFF_TOWERSHIELD_UNDEAD', label: 'Sarcophagus' },
+          { value: 'OFF_SHIELD_HELL', label: 'Caitiff Shield' },
+          { value: 'OFF_SPIKEDSHIELD_MORGANA', label: 'Facebreaker' },
+          { value: 'OFF_SHIELD_AVALON', label: 'Astral Aegis' },
+          { value: 'OFF_SHIELD_CRYSTAL', label: 'Unbreakable' },
+        ]
+      }
+    ]
+  }
+]
+
+const capes = [
+  {
+    value: 'Capes', label: 'Capes', selectable: false, children: [
+      { value: 'CAPE', label: 'Cape' },
+      { value: 'CAPEITEM_FW_BRIDGEWATCH', label: 'Bridgewatch' },
+      { value: 'CAPEITEM_FW_FORTSTERLING', label: 'Fort Sterling' },
+      { value: 'CAPEITEM_FW_LYMHURST', label: 'Lymhurst' },
+      { value: 'CAPEITEM_FW_MARTLOCK', label: 'Martlock' },
+      { value: 'CAPEITEM_FW_THETFORD', label: 'Thetford' },
+      { value: 'CAPEITEM_FW_CAERLEON', label: 'Caerleon' },
+      { value: 'CAPEITEM_FW_BRECILIEN', label: 'Brecilien' },
+      { value: 'CAPEITEM_HERETIC', label: 'Heretic' },
+      { value: 'CAPEITEM_UNDEAD', label: 'Undead' },
+      { value: 'CAPEITEM_KEEPER', label: 'Keeper' },
+      { value: 'CAPEITEM_MORGANA', label: 'Morgana' },
+      { value: 'CAPEITEM_AVALONIAN', label: 'Avalonian' },
+      { value: 'CAPEITEM_DEMON', label: 'Demon' },
+      { value: 'CAPEITEM_SMUGGLER', label: 'Smuggler' },
+    ]
+  }
+]
+
 const treeData = [
 ];
 treeData.push.apply(treeData, weapons)
 treeData.push.apply(treeData, chestArmor)
 treeData.push.apply(treeData, headArmor)
 treeData.push.apply(treeData, footArmor)
+treeData.push.apply(treeData, offhands)
+treeData.push.apply(treeData, capes)
 
 export default treeData
 

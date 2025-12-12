@@ -23,12 +23,10 @@ const useFragmentPriceFetcher = (inputValue) => {
   }
 
   useEffect(() => {
-    console.log(`inputValue: ${inputValue}`);
     if (!inputValue) {
       setLoading(false);
       return
     }
-    console.log(`running fragment useEffect ${inputValue}`)
 
     const fetchData = async () => {
       const resultsMap = new Map();
@@ -65,14 +63,12 @@ const useFragmentPriceFetcher = (inputValue) => {
               if (!res.ok) {
                 throw new Error(`Failed to fetch price for ${fragment}: Status ${res.status}`);
               }
-              console.info(res.json)
               return res.json();
             })
             .then(priceData => ({fragment, data: priceData}));
         });
 
         const newResults = await Promise.all(promises);
-        console.info(newResults);
 
         newResults.forEach(({ fragment, data: priceData }) => {
           setCacheData(fragment, priceData);
@@ -82,7 +78,6 @@ const useFragmentPriceFetcher = (inputValue) => {
         inputValue.forEach(fragment => {
           finalData[fragment] = resultsMap.get(fragment);
         });
-        console.info(finalData);
 
         setFragData(finalData);
       } catch (e) {
@@ -97,7 +92,6 @@ const useFragmentPriceFetcher = (inputValue) => {
     fetchData();
   }, [inputValue]);
 
-  console.info(fragData);
   return { fragData, loading, error };
 
 }
